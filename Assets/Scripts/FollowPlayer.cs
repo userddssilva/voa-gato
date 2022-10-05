@@ -33,9 +33,5 @@ public class FollowPlayer : MonoBehaviour
             new Vector3(posX, posY, -10f) + offset, // Nova posição com o espaço
             velocidade * Time.deltaTime
         );
-
-        // transform.position = new Vector3(playerPosition.x, playerPosition.y, -10f);
-
-        Debug.Log($"Position camera: {transform.position}");
     }
 }

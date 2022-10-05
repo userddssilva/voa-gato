@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,15 +11,15 @@ public class CircleMoveController : MonoBehaviour
     private Rigidbody2D CircleRigidbody2D;
     public TilemapCollider2D CenaryCollider2D;
 
+    private PlayerController PlayerController;
+
     // Start is called before the first frame update
     void Start()
     {
         width = (float)Screen.width / 2.0f;
         height = (float)Screen.height / 2.0f;
 
-        // Position used for the cube.
         position = new Vector3(0.0f, 0.0f, 0.0f);
-
         CircleRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -37,7 +36,7 @@ public class CircleMoveController : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 )
         {
             var touch = Input.GetTouch(0);
             FollowTouchInScreen(touch.position.x, touch.position.y);
@@ -58,7 +57,6 @@ public class CircleMoveController : MonoBehaviour
         Vector3 gameObjectWorldPosition = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 newGameObjectWorldPosition = new Vector3(x, y, gameObjectWorldPosition.z);
         position = Camera.main.ScreenToWorldPoint(newGameObjectWorldPosition);
-        // transform.position = position;
         CircleRigidbody2D.MovePosition(position);
     }
 }
