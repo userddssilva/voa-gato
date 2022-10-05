@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class CircleMoveController : MonoBehaviour
 {
     private Vector3 position;
     private float width;
     private float height;
+
+    private Collider2D CircleCollider2D;
+    private Rigidbody2D CircleRigidbody2D;
+    public TilemapCollider2D CenaryCollider2D;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +19,8 @@ public class CircleMoveController : MonoBehaviour
 
         // Position used for the cube.
         position = new Vector3(0.0f, 0.0f, 0.0f);
+
+        CircleRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void OnGUI()
@@ -35,10 +42,14 @@ public class CircleMoveController : MonoBehaviour
             FollowTouchInScreen(touch.position.x, touch.position.y);
         }
 
+        // CircleCollider2D = gameObject.GetComponent<Collider2D>();
+        // if (!CircleCollider2D.IsTouching(CenaryCollider2D))
+        // {
         if (Input.GetMouseButton(0))
         {
             FollowTouchInScreen(Input.mousePosition.x, Input.mousePosition.y);
         }
+        // }
     }
 
     private void FollowTouchInScreen(float x, float y)
@@ -46,6 +57,7 @@ public class CircleMoveController : MonoBehaviour
         Vector3 gameObjectWorldPosition = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 newGameObjectWorldPosition = new Vector3(x, y, gameObjectWorldPosition.z);
         position = Camera.main.ScreenToWorldPoint(newGameObjectWorldPosition);
-        transform.position = position;
+        // transform.position = position;
+        CircleRigidbody2D.MovePosition(position);
     }
 }
